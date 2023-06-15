@@ -7,24 +7,29 @@ a:focus-visible {outline: 4px solid var(--main-color); outline-offset: 4px; bord
 
 .flex {display: flex; gap: 16px;} .grid {display: grid; gap: 16px;}
 
-.btn {height: 48px; background-color: var(--main-bg); border: none; border-radius: 32px;}
+.btn {background-color: var(--main-bg); border: none; border-radius: 32px;}
 .btn:is(:hover,:active,:focus):not(:disabled) {background-color: var(--accent); color: var(--color);}
-.btn:is(:hover,:active,:focus) svg {fill: var(--color);}
+.btn:is(:hover,:active,:focus):not(:disabled) svg {fill: var(--color);}
 .btn:focus-visible {outline: 4px solid var(--main-color); outline-offset: 0;}
-.btn:disabled {background-color: var(--color);}
+.btn:disabled {filter: grayscale(1);}
 
 .btn__small {display: grid; place-content: center; width: 48px; height: 48px;}
-.btn__large {display: flex; gap: 8px; align-items: center; padding: 16px 32px;}
+.btn__large {display: flex; gap: 8px; align-items: center; height: 48px; padding: 16px 32px;}
 
-.btn__icon {
-    height: 48px;
-    width: 48px;
-    background-color: red;
-    border: none;
-    clip-path:url("#heart-shape");
+.btn__clip {height: 48px; width: 48px; background-color: var(--main-color);}
+.btn__clip:is(:hover,:active,:focus) {filter: opacity(0.5);}
+.btn__clip.star {clip-path:url("#icon-shape");}
+
+.btn__icon {position: relative; display: grid; place-content: center; height: 48px; width: 48px; background-color: transparent; border: none;}
+.btn__icon:is(:hover,:active,:focus)::before {content: ''; position: absolute; inset: 0; border-radius: 50%;}
+
+.star:is(:hover,:active,:focus)::before {background-color: #ffd70020;}
+.star:is(:hover,:active,:focus) svg {fill: gold;}
+
+body {
+    padding: 16px; margin: 0; background-color: var(--main-bg);
+    counter-reset: section;
 }
-
-body {padding: 16px; margin: 0; background-color: var(--main-bg); }
 .icons {position: absolute;}
 
 /* Header */
@@ -34,7 +39,13 @@ body {padding: 16px; margin: 0; background-color: var(--main-bg); }
 }
 /* Main */
 .section__title {
-    font-size: 1.5rem;
+    font-size: 1.5rem;   
+}
+.title::before {
+    font-weight: bold;
+    color: var(--accent);
+    counter-increment: section;
+    content: counter(section) ' ';
 }
 
 .btns__item {
