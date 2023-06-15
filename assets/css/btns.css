@@ -13,6 +13,8 @@
 .btn__icon {
     display: grid; place-content: center; height: 48px; width: 48px; background-color: transparent; border: none; border-radius: 50%;
 
+    &:focus-within {outline: 2px solid gold; outline-offset: 0;}
+
     &.star:is(:hover,:active,:focus) {background-color: #ffd70020;}
     &.star:is(:hover,:active,:focus) svg {fill: gold;}
 }
